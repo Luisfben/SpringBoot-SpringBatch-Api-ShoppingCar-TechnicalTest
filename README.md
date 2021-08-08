@@ -46,6 +46,7 @@ Si usted no ha tenido la oportunidad de haber utilizado una herramienta de softw
 
 ### Diseño solución
 
+![alt text](src/main/resources/images/desing.png)
 
 
 ### Base de datos relacional
@@ -55,6 +56,9 @@ Se utilizo la base de datos relacional embebida que ofrece la tecnología Spring
 `/src/main/resources`
 
 El modelo datos definido para la solución esta definido en el siguiente modelo entidad relación.
+
+![alt text](src/main/resources/images/mer.png)
+
 
 ## Iniciar aplicación
 
@@ -77,6 +81,9 @@ Adicione una linea al final, como el ejemplo:
 `http://localhost:8081/`
 
 Para cargar los datos de productos mediante el archivo CSV, se debe seleccionar el archivo y dar el botón: Upload File.
+
+![alt text](src/main/resources/images/uploadfile.png)
+
 
 ## Usar servicios
 
