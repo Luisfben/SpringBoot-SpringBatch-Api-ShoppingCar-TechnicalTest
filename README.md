@@ -10,18 +10,17 @@ compañía.
 1. Definir el modelo de datos para almacenar los productos.
 
 2. Implementar un Job Batch que realice la lectura, limpieza y cargue del catálogo de productos a la base de datos. Solo debe cargar productos que tengan toda la información evitando registros duplicados.
-a. Reader: lee el producto desde el archivo csv.
-b. Processor: realiza las transformaciones a los datos leídos desde el archivo.
-c. Writer: escribe el producto en la base de datos.
+- Reader: lee el producto desde el archivo csv.
+- Processor: realiza las transformaciones a los datos leídos desde el archivo.
+- Writer: escribe el producto en la base de datos.
 
 ### Segunda Parte: API REST Carrito de Compras
 3. Servicio que permita consultar de manera paginada los productos existentes en la base de datos. El servicio debe soportar la consulta de productos por
 los siguientes criterios:
-a. Por coincidencia del nombre completo o parte de él.
-b. Por rango de precios.
-c. Por marca.
-4. Servicio para agregar un producto al carrito de compras. El servicio debe validar que haya existencias suficientes del producto antes de ser agregado
-al carrito.
+- Por coincidencia del nombre completo o parte de él.
+- Por rango de precios.
+- Por marca.
+4. Servicio para agregar un producto al carrito de compras. El servicio debe validar que haya existencias suficientes del producto antes de ser agregado al carrito.
 5. Servicio para consultar los productos agregados en el carrito de compras.
 6. Servicio para vaciar el carrito de compras.
 7. Servicio que permita finalizar la compra de los productos existentes en el carrito de compras afectando de manera oficial las existencias de los productos en la base de datos.
