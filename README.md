@@ -81,7 +81,7 @@ Para cargar los datos de productos mediante el archivo CSV, se debe seleccionar 
 
 ## Usar servicios
 
-#### GET /product
+### GET /product
 
 Servicio que permita consultar de manera paginada los productos existentes en la base de datos. El servicio debe soportar la consulta de productos por los siguientes criterios:
 
@@ -102,7 +102,7 @@ Ejemplo:
 
 ```json
 {
-	"customer_id": "1",
+  "customer_id": "1",
   "product_id": "1",
   "quantity": 4
 }
@@ -130,7 +130,7 @@ Servicio que permita finalizar la compra de los productos existentes en el carri
 
 ```json
 {
-	"customer_id": "1",
+   "customer_id": "1",
 }
 ```
 
