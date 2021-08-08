@@ -1,0 +1,1 @@
+insert into CUSTOMER (type_id,document_id,first_name,last_name,phone,address,email)values('CC','16536990','Luis','Benavides','3207861790','Cra 23','none@none.com');
