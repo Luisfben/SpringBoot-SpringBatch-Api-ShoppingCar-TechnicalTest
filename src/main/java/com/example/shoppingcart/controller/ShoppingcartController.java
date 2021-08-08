@@ -1,12 +1,16 @@
 package com.example.shoppingcart.controller;
 
+import java.io.IOException;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameter;
@@ -20,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +33,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.shoppingcart.dto.OrderDTO;
 import com.example.shoppingcart.dto.SalesOrderDTO;
@@ -58,12 +65,24 @@ public class ShoppingcartController {
 	@Autowired
 	private SalesOrderRepository salesOrderRepository;
 
-	private static int PENDING_TO_BUY = 0;
-	private static int SOLD_OUT = 1;
+	private final int PENDING_TO_BUY = 0;
+	private final int SOLD_OUT = 1;
+	private final String UPLOAD_DIR = "./src/main/resources/";
 
-	@GetMapping("/v1/load")
-	public BatchStatus load() throws JobExecutionAlreadyRunningException, JobRestartException,
-			JobInstanceAlreadyCompleteException, JobParametersInvalidException {
+	@PostMapping("/v1/upload")
+	public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes attributes)
+			throws JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException,
+			JobParametersInvalidException, IOException {
+
+		if (file.isEmpty()) {
+			attributes.addFlashAttribute("message", "Please select a file to upload.");
+			return "redirect:/";
+		}
+
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+		Path path = Paths.get(UPLOAD_DIR + fileName);
+		Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
 		Map<String, JobParameter> maps = new HashMap<>();
 		maps.put("time", new JobParameter(System.currentTimeMillis()));
@@ -76,7 +95,7 @@ public class ShoppingcartController {
 		while (jobExecution.isRunning()) {
 			System.out.println("...");
 		}
-		return jobExecution.getStatus();
+		return jobExecution.getStatus().toString();
 	}
 
 	@GetMapping("/v1/product")
