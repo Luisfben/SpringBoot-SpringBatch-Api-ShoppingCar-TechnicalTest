@@ -79,6 +79,67 @@ Adicione una linea al final, como el ejemplo:
 
 Para cargar los datos de productos mediante el archivo CSV, se debe seleccionar el archivo y dar el botón: Upload File.
 
+## Usar servicios
+
+#### GET /product
+
+Servicio que permita consultar de manera paginada los productos existentes en la base de datos. El servicio debe soportar la consulta de productos por los siguientes criterios:
+
+a. Por coincidencia del nombre completo o parte de él.
+b. Por rango de precios.
+c. Por marca.
+
+Ejemplo:
+http://localhost:8081/api/v1/product?name=LG&pricestart=731900&priceend=731900&mark=LG
+
+#### POST /order
+
+Servicio para agregar un producto al carrito de compras. El servicio debe validar que haya existencias suficientes del producto antes de ser agregado al carrito
+
+Ejemplo:
+
+***Request***
+
+```json
+{
+	"customer_id": "1",
+  "product_id": "1",
+  "quantity": 4
+}
+```
+
+#### GET /ordercustomer
+
+Servicio para consultar los productos agregados en el carrito de compras
+
+Ejemplo:
+http://localhost:8081/api/v1/ordercustomer/1
+
+#### DELETE /ordercustomer
+
+Servicio para vaciar el carrito de compras
+
+Ejemplo:
+http://localhost:8081/api/v1/ordercustomer/1
+
+#### POST /salesorder
+
+Servicio que permita finalizar la compra de los productos existentes en el carrito de compras afectando de manera oficial las existencias de los productos en la base de datos
+
+***Request***
+
+```json
+{
+	"customer_id": "1",
+}
+```
+
+
+
+
+
+
+
 
 
 
