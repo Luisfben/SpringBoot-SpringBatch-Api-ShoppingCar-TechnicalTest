@@ -85,14 +85,14 @@ Para cargar los datos de productos mediante el archivo CSV, se debe seleccionar 
 
 Servicio que permita consultar de manera paginada los productos existentes en la base de datos. El servicio debe soportar la consulta de productos por los siguientes criterios:
 
-a. Por coincidencia del nombre completo o parte de él.
-b. Por rango de precios.
-c. Por marca.
+- Por coincidencia del nombre completo o parte de él.
+- Por rango de precios.
+- Por marca.
 
 Ejemplo:
 http://localhost:8081/api/v1/product?name=LG&pricestart=731900&priceend=731900&mark=LG
 
-#### POST /order
+### POST /order
 
 Servicio para agregar un producto al carrito de compras. El servicio debe validar que haya existencias suficientes del producto antes de ser agregado al carrito
 
@@ -108,21 +108,21 @@ Ejemplo:
 }
 ```
 
-#### GET /ordercustomer
+### GET /ordercustomer
 
 Servicio para consultar los productos agregados en el carrito de compras
 
 Ejemplo:
 http://localhost:8081/api/v1/ordercustomer/1
 
-#### DELETE /ordercustomer
+### DELETE /ordercustomer
 
 Servicio para vaciar el carrito de compras
 
 Ejemplo:
 http://localhost:8081/api/v1/ordercustomer/1
 
-#### POST /salesorder
+### POST /salesorder
 
 Servicio que permita finalizar la compra de los productos existentes en el carrito de compras afectando de manera oficial las existencias de los productos en la base de datos
 
